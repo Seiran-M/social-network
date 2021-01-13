@@ -2,7 +2,7 @@
 .app-wrapper {
     display: grid;
 
-    width: 1400px;
+    max-width: 1400px;
     margin: 0 auto;
 
     grid-template-areas:
@@ -13,3 +13,10 @@
     grid-template-columns: 2fr 10fr;
 }
 
+.app-wrapper-content {
+    background-color: #ccc8c8;
+}
+
+.app-wrapper-content img {
+    max-width: 1200px;
+}
