@@ -1,8 +1,10 @@
 import React from 'react'
 import s from './Post.module.css'
+import {PostsType} from "../../../../redux/state";
 
+type PropsType = PostsType
 
-const Post = (props: any) => {
+const Post: React.FC<PropsType> = (props) => {
     return (
         <div className={s.item}>
             <img
@@ -15,4 +17,5 @@ const Post = (props: any) => {
         </div>
     )
 }
+
 export default Post

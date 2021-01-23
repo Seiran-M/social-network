@@ -1,21 +1,29 @@
 import React from 'react';
 import s from './MyPosts.module.css';
-import Post from "./Post/Post";
+import Post from './Post/Post';
+import {PostsType, RootStateType} from "../../../redux/state";
 
-const MyPosts = () => {
+
+type PropsType={
+    posts: Array<PostsType>
+}
+
+const MyPosts:React.FC<PropsType> = (props) => {
+    let postsElement = props.posts.map(p =>
+        <Post  message={p.message} likesCount={p.likesCount} id={p.id}/>)
+
+    // UI
     return (
-        <div>
-            My posts
+        <div className={s.postsBlock}>
+            <h3>My posts</h3>
             <div>
-                <textarea></textarea>
+                <div>
+                    <textarea></textarea>
+                </div>
                 <button>Add post</button>
             </div>
             <div className={s.posts}>
-                <Post
-                    message={'Hi, how are you?'}
-                    likesCount={15}
-                />
-                <Post message={"It's my first post!"} likesCount={20}/>
+                <div className={s.post}>{postsElement}</div>
             </div>
         </div>
     )

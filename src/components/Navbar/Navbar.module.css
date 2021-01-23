@@ -1,11 +1,18 @@
 .nav {
-background-color: bisque;
+background-color: #eab97f;
+    padding: 50px;
 }
 
-.item {
-    color: green;
+.item{
+    padding-bottom: 10px;
 }
 
-.item.active{
+.item a{
+    color: white;
+    text-decoration: none;
+
+}
+
+.item a.active{
     color: blue;
 }
