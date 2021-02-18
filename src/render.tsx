@@ -15,9 +15,9 @@ export const renderEntireTree = () => {
 }
 
 reportWebVitals()
-
-
-store.subscribe(() => {
-   const state = store.getState()
-   renderEntireTree()
-})
+//
+//
+// store.subscribe(() => {
+//    const state = store.getState()
+//    renderEntireTree()
+// })

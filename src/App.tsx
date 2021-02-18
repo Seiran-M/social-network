@@ -10,6 +10,7 @@ import News from './components/News/News'
 import Settings from './components/Settings/Settings'
 import {ActionsTypes, StoreType} from './redux/store'
 import {StoreReduxType} from './redux/redux-store'
+import {DialoguesContainer} from './components/Dialogues/DialoguesContainer'
 
 type PropsType = {
    store: StoreReduxType
@@ -24,7 +25,7 @@ export const App: React.FC<PropsType> = (props) => {
             <Header/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
-               <Route path={'/dialogues'} render={() => <Dialogues store={props.store}/>}/>
+               <Route path={'/dialogues'} render={() => <DialoguesContainer store={props.store}/>}/>
                <Route path={'/profile'} render={() => <Profile store={props.store}/>}/>
                <Route path={'/news'} render={() => <News/>}/>
                <Route path={'/music'} render={() => <Music/>}/>

@@ -1,5 +1,4 @@
 import React from 'react'
-// import { addPostAC, updateNewPostTextAC} from '../../../redux/profile-reducer'
 import {MyPosts} from './MyPosts'
 import {StoreReduxType} from '../../../redux/redux-store'
 import {addPostAC, updateNewPostTextAC} from '../../../redux/profile-reducer'
@@ -13,8 +12,7 @@ export const MyPostsContainer: React.FC<PropsType> = (props) => {
 
    const addPost = () => props.store.dispatch(addPostAC())
 
-   const onPostChange=(text:string)=>{
-      debugger
+   const onPostChange = (text: string) => {
       props.store.dispatch(updateNewPostTextAC(text))
    }
 
