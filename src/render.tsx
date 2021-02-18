@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import {App} from './App';
-import reportWebVitals from './reportWebVitals';
-import store from "./redux/state";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import {App} from './App'
+import reportWebVitals from './reportWebVitals'
+import { store } from './redux/redux-store'
 
 export const renderEntireTree = () => {
    ReactDOM.render(
@@ -11,7 +11,13 @@ export const renderEntireTree = () => {
          <App store={store} dispatch={store.dispatch.bind(store)}/>
       </React.StrictMode>,
       document.getElementById('root')
-   );
+   )
 }
 
-reportWebVitals();
+reportWebVitals()
+
+
+store.subscribe(() => {
+   const state = store.getState()
+   renderEntireTree()
+})

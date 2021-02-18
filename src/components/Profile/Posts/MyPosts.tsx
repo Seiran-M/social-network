@@ -1,23 +1,24 @@
-import React, {ChangeEvent} from 'react';
-import s from './MyPosts.module.css';
-import {Post} from './Post/Post';
-import {ActionsTypes, addPostAC, changeNewTextAC, PostsType} from "../../../redux/state";
-
+import React from 'react'
+import s from './MyPosts.module.css'
+import {Post} from './Post/Post'
+import { PostsType} from '../../../redux/store'
 
 type PropsType = {
+   newPostText: string
    posts: Array<PostsType>
-   message: string
-   dispatch: (action: ActionsTypes) => void
+   addPost: () => void
+   updateNewPostText: (text: string) => void
 }
 
-
 export const MyPosts: React.FC<PropsType> = (props) => {
-   const postsElement = props.posts.map(p =>
-      <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)
-   // const newPostElement =React.createRef()
-   const addPost = () => props.dispatch(addPostAC(props.message))
-   const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-      props.dispatch(changeNewTextAC(e.currentTarget.value))
+
+   const postsElement = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)
+   const newPostElement = React.createRef<any>()
+   const onAddPost = () => props.addPost()
+   const onPostChange = () => {
+      const text = newPostElement.current.value
+      debugger
+      props.updateNewPostText(text)
    }
 
    return (
@@ -26,11 +27,12 @@ export const MyPosts: React.FC<PropsType> = (props) => {
          <div>
             <div>
                <textarea placeholder={'Enter your post'}
-                         value={props.message}
-                         onChange={newTextChangeHandler}>
+                         ref={newPostElement}
+                         value={props.newPostText}
+                         onChange={onPostChange}>
                </textarea>
             </div>
-            <button onClick={addPost}>Add post</button>
+            <button onClick={onAddPost}>Add post</button>
          </div>
          <div className={s.posts}>
             <div className={s.post}>{postsElement}</div>

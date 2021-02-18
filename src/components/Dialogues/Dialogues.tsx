@@ -1,22 +1,26 @@
-import React, {ChangeEvent} from 'react';
-import s from './Dialogues.module.css';
-import DialogueItem from './DialoguesItem/DialoguesItem';
-import Message from './Messages/Messages';
-import {ActionsTypes, DialoguesPageType, sendMessageAC, updateNewMessageBodyAC} from '../../redux/state';
+import React, {ChangeEvent} from 'react'
+import s from './Dialogues.module.css'
+import DialogueItem from './DialoguesItem/DialoguesItem'
+import Message from './Messages/Messages'
+import {StoreReduxType} from '../../redux/redux-store'
+import {sendMessageAC, updateNewMessageBodyAC} from '../../redux/dialogues-reducer'
+import {updateNewPostTextAC} from '../../redux/profile-reducer'
 
 type PropsType = {
-   dialogPage: DialoguesPageType
-   dispatch: (action: ActionsTypes) => void
+   store: StoreReduxType
 }
 
 export const Dialogues: React.FC<PropsType> = (props) => {
-   const dialoguesElements = props.dialogPage.dialogues.map(d => <DialogueItem id={d.id} name={d.name}/>)
-   const messagesElements = props.dialogPage.messages.map(m => <Message id={m.id} message={m.message}/>)
-   const newMessageBody = props.dialogPage.newMessageBody
 
-   const onSendMessageClick = () => props.dispatch(sendMessageAC())
+   const state = props.store.getState().dialoguesPage
+
+   const dialoguesElements = state.dialogues.map(d => <DialogueItem id={d.id} name={d.name}/>)
+   const messagesElements = state.messages.map(m => <Message id={m.id} message={m.message}/>)
+   const newMessageBody = state.newMessageBody
+
+   const onSendMessageClick = () => props.store.dispatch(sendMessageAC())
    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-      props.dispatch(updateNewMessageBodyAC(e.currentTarget.value))
+      props.store.dispatch(updateNewMessageBodyAC(e.currentTarget.value))
    }
 
    return (
