@@ -12,21 +12,16 @@ import {ActionsTypes, StoreType} from './redux/store'
 import {StoreReduxType} from './redux/redux-store'
 import {DialoguesContainer} from './components/Dialogues/DialoguesContainer'
 
-type PropsType = {
-   store: StoreReduxType
-   dispatch: (action: ActionsTypes) => void
-}
+export const App: React.FC = () => {
 
-export const App: React.FC<PropsType> = (props) => {
-   const state = props.store.getState()
    return (
       <BrowserRouter>
          <div className={'app-wrapper'}>
             <Header/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
-               <Route path={'/dialogues'} render={() => <DialoguesContainer store={props.store}/>}/>
-               <Route path={'/profile'} render={() => <Profile store={props.store}/>}/>
+               <Route path={'/dialogues'} render={() => <DialoguesContainer/>}/>
+               <Route path={'/profile'} render={() => <Profile/>}/>
                <Route path={'/news'} render={() => <News/>}/>
                <Route path={'/music'} render={() => <Music/>}/>
                <Route path={'/settings'} render={() => <Settings/>}/>
@@ -36,4 +31,3 @@ export const App: React.FC<PropsType> = (props) => {
    )
 }
 
-// dispatch={props.store.dispatch.bind(props.store)}

@@ -5,8 +5,8 @@ import Message from './Messages/Messages'
 import {DialoguesPageType} from '../../redux/store'
 
 type PropsType = {
-   updateNewMessageBody: (body: string) => void
    sendMessage: () => void
+   updateNewMessageBody: (body: string) => void
    dialoguesPage: DialoguesPageType
 }
 

@@ -14,6 +14,7 @@ export const MyPosts: React.FC<PropsType> = (props) => {
 
    const postsElement = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)
    const newPostElement = React.createRef<any>()
+
    const onAddPost = () => props.addPost()
    const onPostChange = () => {
       const text = newPostElement.current.value
