@@ -1,9 +1,18 @@
+$tomato:tomato;
+
 .postsBlock{
     padding: 20px;
 }
 
 .posts{
     margin-top: 20px;
+}
+
+.btn{
+    background-color: $tomato;
+  :active{
+    background-color: red;
+  }
 }
 
 /*.post{*/

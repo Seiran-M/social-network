@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react'
-import s from './Dialogues.module.css'
+import s from './Dialogues.module.scss'
 import DialogueItem from './DialoguesItem/DialoguesItem'
 import Message from './Messages/Messages'
 import {DialoguesPageType} from '../../redux/store'
@@ -11,15 +11,12 @@ type PropsType = {
 }
 
 export const Dialogues: React.FC<PropsType> = (props) => {
-
    const state = props.dialoguesPage
-
-   const dialoguesElements = state.dialogues.map(d => <DialogueItem id={d.id} name={d.name}/>)
-   const messagesElements = state.messages.map(m => <Message id={m.id} message={m.message}/>)
+   const dialoguesElements = state.dialogues.map(d => <DialogueItem id={d.id} key={d.id} name={d.name}/>)
+   const messagesElements = state.messages.map(m => <Message id={m.id} key={m.id} message={m.message}/>)
    const newMessageBody = state.newMessageBody
 
    const onSendMessageClick = () => props.sendMessage()
-
    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
       const body = e.currentTarget.value
       props.updateNewMessageBody(body)
