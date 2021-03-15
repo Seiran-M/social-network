@@ -1,1 +1,1 @@
-.userPhoto{    width: 100px;}
+.userPhoto{    width: 100px;}.pagination{    display: flex;    max-width: 100px;    justify-content: space-between;    cursor: pointer;}.selectedPage{    font-weight: bold;    font-size: 1.1em;}

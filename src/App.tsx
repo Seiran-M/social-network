@@ -11,7 +11,7 @@ import Settings from './components/Settings/Settings'
 import {ActionsType, StoreType} from './redux/store'
 import {StoreReduxType} from './redux/redux-store'
 import {DialoguesContainer} from './components/Dialogues/DialoguesContainer'
-import Users from './components/Users/Users'
+import UsersiContainer from './components/Users/UsersContainer'
 import { FC } from 'react'
 import UsersContainer from './components/Users/UsersContainer'
 
@@ -35,4 +35,3 @@ export const App: FC = () => {
       </BrowserRouter>
    )
 }
-
