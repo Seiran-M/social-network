@@ -8,15 +8,16 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import Music from './components/Music/Music'
 import News from './components/News/News'
 import Settings from './components/Settings/Settings'
-import {ActionsType, StoreType} from './redux/store'
 import {StoreReduxType} from './redux/redux-store'
 import {DialoguesContainer} from './components/Dialogues/DialoguesContainer'
 import UsersiContainer from './components/Users/UsersContainer'
 import { FC } from 'react'
 import UsersContainer from './components/Users/UsersContainer'
+import ProfileContainer from './components/Profile/ProfileContainer'
 
 
 export const App: FC = () => {
+
 
    return (
       <BrowserRouter>
@@ -25,7 +26,7 @@ export const App: FC = () => {
             <Navbar/>
             <div className={'app-wrapper-content'}>
                <Route path={'/dialogues'} render={() => <DialoguesContainer />}/>
-               <Route path={'/profile'} render={() => <Profile/>}/>
+               <Route path={'/profile:userId?'} render={() => <ProfileContainer />}/>
                <Route path={'/users'} render={() => <UsersContainer/>}/>
                <Route path={'/news'} render={() => <News/>}/>
                <Route path={'/music'} render={() => <Music/>}/>
