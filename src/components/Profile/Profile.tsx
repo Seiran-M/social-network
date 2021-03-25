@@ -9,7 +9,6 @@ type PropsType = {
    profile: ProfileType
 }
 
-
 export const Profile: React.FC<PropsType> = (props) => {
 
    return (
