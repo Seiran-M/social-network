@@ -1,18 +1,15 @@
 import React from 'react'
 import './App.scss'
-import Navbar from './components/Navbar/Navbar'
-import {Profile} from './components/Profile/Profile'
-import {Dialogues} from './components/Dialogues/Dialogues'
+import {Navbar} from './components/Navbar/Navbar'
 import {BrowserRouter, Route} from 'react-router-dom'
-import Music from './components/Music/Music'
-import News from './components/News/News'
-import Settings from './components/Settings/Settings'
-import {ReduxStoreType} from './redux/redux-store'
+import {Music} from './components/Music/Music'
+import {News} from './components/News/News'
+import {Settings} from './components/Settings/Settings'
 import {DialoguesContainer} from './components/Dialogues/DialoguesContainer'
-import UsersiContainer from './components/Users/UsersContainer'
 import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
+import {Login} from './components/Login/Login'
 
 
 export const App: React.FC = () => {
@@ -28,6 +25,7 @@ export const App: React.FC = () => {
                <Route path={'/news'} render={() => <News/>}/>
                <Route path={'/music'} render={() => <Music/>}/>
                <Route path={'/settings'} render={() => <Settings/>}/>
+               <Route path={'/login'} render={() => <Login/>}/>
             </div>
          </div>
       </BrowserRouter>

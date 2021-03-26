@@ -1,5 +1,5 @@
-import React, {FC} from 'react'
-import s from './MyPosts.module.scss'
+import React from 'react'
+import style from './MyPosts.module.scss'
 import {Post} from './Post/Post'
 import {PostsType} from '../../../redux/store'
 
@@ -11,9 +11,10 @@ type PropsType = {
 }
 
 
-export const MyPosts: FC<PropsType> = (props) => {
+export const MyPosts: React.FC<PropsType> = (props) => {
 
-   const postsElement = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} id={p.id}/>)
+   const postsElement = props.posts.map(posts =>
+      <Post key={posts.id} message={posts.message} likesCount={posts.likesCount} id={posts.id}/>)
    const newPostElement = React.createRef<any>()
 
    const onAddPost = () => props.addPost()
@@ -23,7 +24,7 @@ export const MyPosts: FC<PropsType> = (props) => {
    }
 
    return (
-      <div className={s.postsBlock}>
+      <div className={style.postsBlock}>
          <h3>My posts</h3>
          <div>
             <div>
@@ -34,11 +35,11 @@ export const MyPosts: FC<PropsType> = (props) => {
                </textarea>
             </div>
             <div>
-               <button className={s.btn} onClick={onAddPost}>Add post</button>
+               <button className={style.btn} onClick={onAddPost}>Add post</button>
             </div>
          </div>
-         <div className={s.posts}>
-            <div className={s.post}>{postsElement}</div>
+         <div className={style.posts}>
+            <div className={style.post}>{postsElement}</div>
          </div>
       </div>
    )

@@ -1,10 +1,9 @@
 import React from 'react';
 
-const Music = () => {
+export const Music:React.FC = () => {
     return (
         <div>
             Music
         </div>
     )
 }
-export default Music;

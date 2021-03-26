@@ -5,7 +5,10 @@ import {connect} from 'react-redux'
 
 
 const mapStateToProps = (state: AppStateType) => {
-   return {dialoguesPage: state.dialoguesPage}
+   return {
+      dialoguesPage: state.dialoguesPage,
+      isAuth: state.auth.isAuth
+   }
 }
 
 export const DialoguesContainer = connect(mapStateToProps, {sendMessage, updateNewMessageBody})(Dialogues)

@@ -1,10 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const Settings = () => {
-    return (
-        <div>
-            Settings
-        </div>
-    )
+export const Settings: React.FC = () => {
+   return (
+      <div>
+         Settings
+      </div>
+   )
 }
-export default Settings;
