@@ -3,7 +3,6 @@ import style from './Profile.module.scss'
 import {ProfileInfo} from './ProfileInfo/ProfileInfo'
 import {MyPostsContainer} from './Posts/MyPostsContainer'
 import {ProfileType} from '../../redux/profile-reducer'
-import {Redirect} from 'react-router-dom'
 
 
 type PropsType = {
@@ -12,9 +11,11 @@ type PropsType = {
 
 export const Profile: React.FC<PropsType> = (props) => {
 
+   const {profile} = props
+
    return (
       <div className={style.content}>
-         <ProfileInfo profile={props.profile}/>
+         <ProfileInfo profile={profile}/>
          <MyPostsContainer/>
       </div>
    )

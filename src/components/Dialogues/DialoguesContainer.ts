@@ -12,3 +12,4 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 export const DialoguesContainer = connect(mapStateToProps, {sendMessage, updateNewMessageBody})(Dialogues)
+//
