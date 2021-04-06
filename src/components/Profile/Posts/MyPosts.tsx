@@ -2,45 +2,45 @@ import React from 'react'
 import style from './MyPosts.module.scss'
 import {Post} from './Post/Post'
 import {PostsType} from '../../../redux/store'
+import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 
 type PropsType = {
-   newPostText: string
    posts: Array<PostsType>
-   addPost: () => void
-   updateNewPostText: (text: string) => void
+   newPostText: string
+   addPost: (newPostText: string) => void
+}
+export type AddNewPostFormDataType = {
+   newPostText: string
 }
 
-
-export const MyPosts: React.FC<PropsType> = (props) => {
+export const MyPosts = React.memo((props: PropsType) => {
 
    const postsElement = props.posts.map(posts =>
       <Post key={posts.id} message={posts.message} likesCount={posts.likesCount} id={posts.id}/>)
-   const newPostElement = React.createRef<any>()
-
-   const onAddPost = () => props.addPost()
-   const onPostChange = () => {
-      const text = newPostElement.current.value
-      props.updateNewPostText(text)
+   const onAddPost = (values: AddNewPostFormDataType) => {
+      props.addPost(values.newPostText)
    }
 
-   return (
-      <div className={style.postsBlock}>
-         <h3>My posts</h3>
-         <div>
+   const AddNewPostForm: React.FC<InjectedFormProps<AddNewPostFormDataType>> = (props) => {
+      return (
+         <form onSubmit={props.handleSubmit}>
             <div>
-               <textarea ref={newPostElement}
-                         value={props.newPostText}
-                         onChange={onPostChange}
-                         placeholder={'Enter your post'}>
-               </textarea>
+               <Field name='newPostText'
+                      component={'textarea'}/>
             </div>
             <div>
-               <button className={style.btn} onClick={onAddPost}>Add post</button>
+               <button className={style.btn}>Add post</button>
             </div>
-         </div>
-         <div className={style.posts}>
-            <div className={style.post}>{postsElement}</div>
-         </div>
+         </form>
+      )
+   }
+   const AddNewPostReduxForm = reduxForm<AddNewPostFormDataType>({form: 'ProfileAddNewPostForm'})(AddNewPostForm)
+
+   return <div className={style.postsBlock}>
+      <h3>My posts</h3>
+      <AddNewPostReduxForm onSubmit={onAddPost}/>
+      <div className={style.posts}>
+         <div className={style.post}>{postsElement}</div>
       </div>
-   )
-}
+   </div>
+})

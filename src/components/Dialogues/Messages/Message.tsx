@@ -1,5 +1,5 @@
-import React from 'react';
-import s from '../Dialogues.module.scss';
+import React from 'react'
+import s from '../Dialogues.module.scss'
 
 
 type MessageType = {
@@ -13,5 +13,3 @@ export const Message: React.FC<MessageType> = (props) => {
    )
 }
 
-
-export default Message;

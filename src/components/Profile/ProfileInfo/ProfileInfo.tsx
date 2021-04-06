@@ -2,29 +2,31 @@ import React from 'react'
 import style from './ProfileInfo.module.css'
 import {Preloader} from '../../Preloader/Preloader'
 import {ProfileType} from '../../../redux/profile-reducer'
+import {ProfileStatus} from './ProfileStatus'
 
 type PropsType = {
    profile: ProfileType
+   status: string
+   updateUserStatus: (status: string) => void
 }
 
 export const ProfileInfo: React.FC<PropsType> = (props) => {
+   const {profile, status, updateUserStatus} = props
 
-   if (!props.profile) {
+   if (!profile) {
       return <Preloader/>
    }
 
    return (
-      <div>
-         <div>
-            <img src="https://www.pics4learning.com/images/pics-banner1-1900.jpg" alt=""/>
-         </div>
+      <>
          <div className={style.descriptionBlock}>
-            <img src={props.profile.photos.large} alt=""/>
-            <div>Name: {props.profile.fullName}</div>
-            <div>About me: {props.profile.aboutMe}</div>
-            <div>{props.profile.lookingForAJob}</div>
-            <div>Looking a job: {props.profile.lookingForAJobDescription}</div>
+            <img src={profile.photos.large} alt=""/>
+            <div>Name: {profile.fullName}</div>
+            <div>About me: {profile.aboutMe}</div>
+            <div>{profile.lookingForAJob}</div>
+            <div>Looking a job: {profile.lookingForAJobDescription}</div>
+            <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
          </div>
-      </div>
+      </>
    )
 }
