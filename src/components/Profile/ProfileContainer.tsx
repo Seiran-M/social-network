@@ -5,14 +5,13 @@ import {connect, ConnectedProps} from 'react-redux'
 import {getUserProfile, getUserStatus, updateUserStatus} from '../../redux/profile-reducer'
 import {AppStateType} from '../../redux/redux-store'
 import {RouteComponentProps, withRouter} from 'react-router-dom'
-import {withAuthRedirect} from '../../hoc/withAuthRedirect'
 import {compose} from 'redux'
 
 
 type PathParamsType = { userId: any }
 type PropsType = RouteComponentProps<PathParamsType> & TProps
 
-class ProfileContainer extends React.Component<PropsType> {
+class ProfileContainer extends React.Component<PropsType, AppStateType> {
    componentDidMount() {
       let userId = this.props.match.params.userId
       if (!userId) {
@@ -37,13 +36,13 @@ export const mapStateToProps = (state: AppStateType) => ({
 })
 
 const connector = connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus})
-
-type TProps = ConnectedProps<typeof connector>
-
 export default compose<React.ComponentType>(
    connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}),
    withRouter,
-   withAuthRedirect
+   // withAuthRedirect,
+   connector
 )(ProfileContainer)
+
+type TProps = ConnectedProps<typeof connector>
 
 

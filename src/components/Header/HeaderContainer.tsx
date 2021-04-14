@@ -4,8 +4,7 @@ import {connect, ConnectedProps} from 'react-redux'
 import {getAuthUserData} from '../../redux/auth-reducer'
 import {AppStateType} from '../../redux/redux-store'
 
-class HeaderContainer extends React.Component<TProps> {
-
+class HeaderContainer extends React.Component<TProps, AppStateType> {
    componentDidMount() {
       this.props.getAuthUserData()
    }
@@ -23,6 +22,7 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 const connector = connect(mapStateToProps, {getAuthUserData})
-type TProps = ConnectedProps<typeof connector>
 export default connector(HeaderContainer)
+
+type TProps = ConnectedProps<typeof connector>
 
