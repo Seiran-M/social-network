@@ -1,1 +1,0 @@
-export type PostsType = {   id: number   message: string   likesCount: number}export type addPost = {   newPost: PostsType   postMessage: string}export type addMessage = {   newMessage: PostsType   postMessage: string}

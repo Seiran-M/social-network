@@ -1,6 +1,11 @@
 import React from 'react'
 import style from './Post.module.scss'
-import {PostsType} from "../../../../redux/store";
+
+export type PostsType = {
+   id: number
+   message: string
+   likesCount: number
+}
 
 type PropsType = PostsType
 

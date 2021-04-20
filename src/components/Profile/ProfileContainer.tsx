@@ -6,16 +6,16 @@ import {getUserProfile, getUserStatus, updateUserStatus} from '../../redux/profi
 import {AppStateType} from '../../redux/redux-store'
 import {RouteComponentProps, withRouter} from 'react-router-dom'
 import {compose} from 'redux'
-
-
-type PathParamsType = { userId: any }
-type PropsType = RouteComponentProps<PathParamsType> & TProps
+import {withAuthRedirect} from '../../hoc/withAuthRedirect'
 
 class ProfileContainer extends React.Component<PropsType, AppStateType> {
    componentDidMount() {
-      let userId = this.props.match.params.userId
+      let userId = this.props.match.params.userId;
       if (!userId) {
-         userId = 15471
+         userId = this.props.authorizedUserId || 15471;
+         if (!userId) {
+            this.props.history.push("/login")
+         }
       }
       this.props.getUserProfile(userId)
       this.props.getUserStatus(userId)
@@ -33,16 +33,21 @@ class ProfileContainer extends React.Component<PropsType, AppStateType> {
 export const mapStateToProps = (state: AppStateType) => ({
    profile: state.profilePage.profile,
    status: state.profilePage.status,
+   authorizedUserId: state.auth.id,
+   isAuth: state.auth.isAuth
 })
 
 const connector = connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus})
 export default compose<React.ComponentType>(
    connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}),
    withRouter,
-   // withAuthRedirect,
+   withAuthRedirect,
    connector
 )(ProfileContainer)
 
+// types
+type PropsType = RouteComponentProps<PathParamsType> & TProps
+type PathParamsType = { userId: any }
 type TProps = ConnectedProps<typeof connector>
 
 

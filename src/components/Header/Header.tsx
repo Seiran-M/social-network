@@ -5,10 +5,11 @@ import style from './Header.module.css'
 type PropsType = {
    isAuth: boolean
    login: string | null
+   logout:()=>void
 }
 
 export const Header = (props: PropsType) => {
-   const {isAuth, login} = props
+   const {isAuth, login, logout} = props
 
    return (
       <header className={style.header}>
@@ -16,7 +17,7 @@ export const Header = (props: PropsType) => {
          <div className={style.loginBlock}>
             {
                isAuth
-                  ? login
+                  ? <div>{login}<button onClick={logout} className={style.logoutButton}>Log out</button></div>
                   : < NavLink to={'/login'}> Login </NavLink>
             }
          </div>

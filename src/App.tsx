@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.scss'
 import {Navbar} from './components/Navbar/Navbar'
-import {BrowserRouter, Route} from 'react-router-dom'
+import {Route, withRouter} from 'react-router-dom'
 import {Music} from './components/Music/Music'
 import {News} from './components/News/News'
 import {Settings} from './components/Settings/Settings'
@@ -9,12 +9,25 @@ import DialoguesContainer from './components/Dialogues/DialoguesContainer'
 import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
-import {Login} from './components/Login/Login'
+import Login from './components/Login/Login'
+import {connect, ConnectedProps} from 'react-redux'
+import {AppStateType} from './redux/redux-store'
+import {compose} from 'redux'
+import {initializeApp} from './redux/app-reducer'
+import {Preloader} from './common/Preloader/Preloader'
 
 
-export const App: React.FC = () => {
-   return (
-      <BrowserRouter>
+export class App extends React.Component<TProps, MapStateType> {
+   componentDidMount() {
+      this.props.initializeApp()
+   }
+
+   render() {
+      if (!this.props.initialized) {
+         return <Preloader/>
+      }
+
+      return (
          <div className={'app-wrapper'}>
             <HeaderContainer/>
             <Navbar/>
@@ -28,6 +41,26 @@ export const App: React.FC = () => {
                <Route path={'/login'} render={() => <Login/>}/>
             </div>
          </div>
-      </BrowserRouter>
-   )
+      )
+   }
+}
+
+const MapStateToProps = (state: AppStateType): MapStateType => {
+   return {
+      initialized: state.app.initialized
+   }
+}
+
+
+const connector = connect(MapStateToProps, {initializeApp})
+export default compose<React.ComponentType>(
+   connect(MapStateToProps, {initializeApp}),
+   withRouter,
+   connector
+)(App)
+
+// types
+type TProps = ConnectedProps<typeof connector>
+type MapStateType = {
+   initialized: boolean
 }

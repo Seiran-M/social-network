@@ -4,12 +4,6 @@ import {Preloader} from '../../../common/Preloader/Preloader'
 import {ProfileType} from '../../../redux/profile-reducer'
 import {ProfileStatus} from './ProfileStatus'
 
-type PropsType = {
-   profile: ProfileType
-   status: string
-   updateUserStatus: (status: string) => void
-}
-
 export const ProfileInfo: React.FC<PropsType> = (props) => {
    const {profile, status, updateUserStatus} = props
 
@@ -21,7 +15,7 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
       <>
          <div className={style.descriptionBlock}>
             {/*<img src={profile.photos.large} alt=""/>*/}
-            <img src="https://www.google.com.tr/url?sa=i&url=https%3A%2F%2Fok.ru%2Fprofile%2F573058647374&psig=AOvVaw3HfOwswUBXICJYAXeEbbAd&ust=1618426094275000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCvhKTx--8CFQAAAAAdAAAAABAD" alt=""/>
+            <img src={profile && profile.photos ? profile.photos.large : 'https://www.google.com.tr/url?sa=i&url=https%3A%2F%2Fok.ru%2Fprofile%2F573058647374&psig=AOvVaw3HfOwswUBXICJYAXeEbbAd&ust=1618426094275000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCvhKTx--8CFQAAAAAdAAAAABAD'}/>
             <div>Name: {profile.fullName}</div>
             <div>About me: {profile.aboutMe}</div>
             <div>{profile.lookingForAJob}</div>
@@ -30,4 +24,11 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
          </div>
       </>
    )
+}
+
+// types
+type PropsType = {
+   profile: ProfileType
+   status: string
+   updateUserStatus: (status: string) => void
 }

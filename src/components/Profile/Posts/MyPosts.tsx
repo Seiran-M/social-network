@@ -1,19 +1,10 @@
 import React from 'react'
 import style from './MyPosts.module.scss'
-import {Post} from './Post/Post'
-import {PostsType} from '../../../redux/store'
+import {Post, PostsType} from './Post/Post'
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 import {maxLengthCreator, required} from '../../../utils/validator'
 import {Textarea} from '../../../common/FormsContfolls/FormsControlls'
 
-type PropsType = {
-   posts: Array<PostsType>
-   newPostText: string
-   addPost: (newPostText: string) => void
-}
-export type AddNewPostFormDataType = {
-   newPostText: string
-}
 
 export const MyPosts = React.memo((props: PropsType) => {
    const postsElement = props.posts.map(posts =>
@@ -52,3 +43,13 @@ export const MyPosts = React.memo((props: PropsType) => {
       </div>
    )
 })
+
+// types
+type PropsType = {
+   posts: Array<PostsType>
+   newPostText: string
+   addPost: (newPostText: string) => void
+}
+export type AddNewPostFormDataType = {
+   newPostText: string
+}

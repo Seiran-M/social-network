@@ -12,7 +12,7 @@ const connector = connect(mapStateToProps, {sendMessage})
 
 export default compose<React.ComponentType>(
    connect(mapStateToProps, {sendMessage}),
-   // withAuthRedirect,
+   withAuthRedirect,
 )(Dialogues)
 
 export type TProps = ConnectedProps<typeof connector>
