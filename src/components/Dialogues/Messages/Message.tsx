@@ -1,15 +1,15 @@
 import React from 'react'
-import s from '../Dialogues.module.scss'
+import styles from '../Dialogues.module.scss'
 
+export const Message: React.FC<MessageType> = (props) => {
+   const {message} = props
+   return (
+      <div className={styles.message}> {message} </div>
+   )
+}
 
+// types
 type MessageType = {
    id: number
    message: string
 }
-
-export const Message: React.FC<MessageType> = (props) => {
-   return (
-      <div className={s.message}> {props.message} </div>
-   )
-}
-

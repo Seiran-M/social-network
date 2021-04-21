@@ -1,1 +1,1 @@
-import preloader from '../../assets/preloader.svg'import React from 'react'import style from './Preloader.module.css'export const Preloader: React.FC = () => {   return <img src={preloader} className={style.preloader}/>}
+import React from 'react'import preloader from '../../assets/preloader.svg'import styles from './Preloader.module.css'export const Preloader: React.FC = () => {   return <img src={preloader} className={styles.preloader}/>}

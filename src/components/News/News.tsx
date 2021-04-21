@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-export const News:React.FC = () => {
-    return (
-        <div>
-            News
-        </div>
-    )
+export const News: React.FC = () => {
+   return (
+      <>
+         News
+      </>
+   )
 }

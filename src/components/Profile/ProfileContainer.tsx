@@ -1,30 +1,34 @@
 import React from 'react'
+import {compose} from 'redux'
+import {connect, ConnectedProps} from 'react-redux'
+import {RouteComponentProps, withRouter} from 'react-router-dom'
+
 import style from './Profile.module.scss'
 import {Profile} from './Profile'
-import {connect, ConnectedProps} from 'react-redux'
-import {getUserProfile, getUserStatus, updateUserStatus} from '../../redux/profile-reducer'
 import {AppStateType} from '../../redux/redux-store'
-import {RouteComponentProps, withRouter} from 'react-router-dom'
-import {compose} from 'redux'
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'
+import {getUserProfile, getUserStatus, updateUserStatus} from '../../redux/profile-reducer'
 
 class ProfileContainer extends React.Component<PropsType, AppStateType> {
    componentDidMount() {
-      let userId = this.props.match.params.userId;
+      const {authorizedUserId, history, match, getUserProfile, getUserStatus} = this.props
+      let userId = match.params.userId
       if (!userId) {
-         userId = this.props.authorizedUserId || 15471;
+         userId = authorizedUserId || 15471
          if (!userId) {
-            this.props.history.push("/login")
+            history.push('/login')
          }
       }
-      this.props.getUserProfile(userId)
-      this.props.getUserStatus(userId)
+      getUserProfile(userId)
+      getUserStatus(userId)
    }
 
    render() {
+      const {profile, status, updateUserStatus} = this.props
+
       return (
          <div className={style.content}>
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateUserStatus={this.props.updateUserStatus}/>
+            <Profile {...this.props} profile={profile} status={status} updateUserStatus={updateUserStatus}/>
          </div>
       )
    }

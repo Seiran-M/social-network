@@ -1,9 +1,10 @@
+import React from 'react'
+import {compose} from 'redux'
+import {connect, ConnectedProps} from 'react-redux'
+
 import {AppStateType} from '../../redux/redux-store'
 import {sendMessage} from '../../redux/dialogues-reducer'
-import {connect, ConnectedProps} from 'react-redux'
-import React from 'react'
 import {Dialogues} from './Dialogues'
-import {compose} from 'redux'
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'
 
 const mapStateToProps = (state: AppStateType) => ({dialoguesPage: state.dialoguesPage})
@@ -15,4 +16,5 @@ export default compose<React.ComponentType>(
    withAuthRedirect,
 )(Dialogues)
 
+// types
 export type TProps = ConnectedProps<typeof connector>

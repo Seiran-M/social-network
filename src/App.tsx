@@ -1,7 +1,10 @@
 import React from 'react'
+import {compose} from 'redux'
+import {Route, withRouter} from 'react-router-dom'
+import {connect, ConnectedProps} from 'react-redux'
+
 import './App.scss'
 import {Navbar} from './components/Navbar/Navbar'
-import {Route, withRouter} from 'react-router-dom'
 import {Music} from './components/Music/Music'
 import {News} from './components/News/News'
 import {Settings} from './components/Settings/Settings'
@@ -10,9 +13,7 @@ import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Login from './components/Login/Login'
-import {connect, ConnectedProps} from 'react-redux'
 import {AppStateType} from './redux/redux-store'
-import {compose} from 'redux'
 import {initializeApp} from './redux/app-reducer'
 import {Preloader} from './common/Preloader/Preloader'
 
@@ -46,11 +47,8 @@ export class App extends React.Component<TProps, MapStateType> {
 }
 
 const MapStateToProps = (state: AppStateType): MapStateType => {
-   return {
-      initialized: state.app.initialized
-   }
+   return {initialized: state.app.initialized}
 }
-
 
 const connector = connect(MapStateToProps, {initializeApp})
 export default compose<React.ComponentType>(
@@ -61,6 +59,4 @@ export default compose<React.ComponentType>(
 
 // types
 type TProps = ConnectedProps<typeof connector>
-type MapStateType = {
-   initialized: boolean
-}
+type MapStateType = { initialized: boolean }
