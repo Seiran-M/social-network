@@ -1,12 +1,11 @@
-import React from 'react'
+import React, {FC} from 'react'
 
 import style from './ProfileInfo.module.css'
 import {Preloader} from '../../../common/Preloader/Preloader'
 import {ProfileType} from '../../../redux/profile-reducer'
-import {ProfileStatus} from './ProfileStatus'
 import {ProfileStatusWithHooks} from './ProfileStatusWithHooks'
 
-export const ProfileInfo: React.FC<PropsType> = (props) => {
+export const ProfileInfo: FC<PropsType> = React.memo((props) => {
    const {profile, status, updateUserStatus} = props
 
    if (!profile) {
@@ -16,7 +15,7 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
    return (
       <>
          <div className={style.descriptionBlock}>
-            <img src={profile && profile.photos ? profile.photos.large : 'https://www.google.com.tr/url?sa=i&url=https%3A%2F%2Fok.ru%2Fprofile%2F573058647374&psig=AOvVaw3HfOwswUBXICJYAXeEbbAd&ust=1618426094275000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCvhKTx--8CFQAAAAAdAAAAABAD'}/>
+            <img src={profile && profile.photos ? profile.photos.large : 'https://www.google.com.tr/url?sa=i&url=https%3A%2F%2Fok.ru%2Fprofile%2F573058647374&psig=AOvVaw3HfOwswUBXICJYAXeEbbAd&ust=1618426094275000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCvhKTx--8CFQAAAAAdAAAAABAD'} alt={'profile'}/>
             <div>Name: {profile.fullName}</div>
             <div>About me: {profile.aboutMe}</div>
             <div>{profile.lookingForAJob}</div>
@@ -25,7 +24,7 @@ export const ProfileInfo: React.FC<PropsType> = (props) => {
          </div>
       </>
    )
-}
+})
 
 // types
 type PropsType = {

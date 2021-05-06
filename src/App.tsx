@@ -51,6 +51,7 @@ const MapStateToProps = (state: AppStateType): MapStateType => {
 }
 
 const connector = connect(MapStateToProps, {initializeApp})
+
 export default compose<React.ComponentType>(
    connect(MapStateToProps, {initializeApp}),
    withRouter,

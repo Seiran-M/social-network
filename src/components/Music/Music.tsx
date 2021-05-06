@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {FC} from 'react'
 
-export const Music: React.FC = () => {
+export const Music: FC = React.memo(() => {
    return (
       <div>
          Music
       </div>
    )
-}
+})

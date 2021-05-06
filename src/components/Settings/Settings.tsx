@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {FC} from 'react'
 
-export const Settings: React.FC = () => {
+export const Settings: FC = React.memo(() => {
    return (
       <div>
          Settings
       </div>
    )
-}
+})

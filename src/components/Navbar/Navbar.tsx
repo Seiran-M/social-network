@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {NavLink} from 'react-router-dom'
 
 import styles from './Navbar.module.scss'
 
-export const Navbar: React.FC = () => {
+export const Navbar: FC =React.memo( () => {
 
    return (
       <nav className={styles.nav}>
@@ -27,4 +27,4 @@ export const Navbar: React.FC = () => {
          </div>
       </nav>
    )
-}
+})

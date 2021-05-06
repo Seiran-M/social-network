@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {NavLink} from 'react-router-dom'
 import styles from './Header.module.css'
 
-export const Header = (props: PropsType) => {
+export const Header:FC<PropsType> =React.memo( (props) => {
    const {isAuth, login, logout} = props
 
    return (
@@ -17,7 +17,7 @@ export const Header = (props: PropsType) => {
          </div>
       </header>
    )
-}
+})
 
 // types
 type PropsType = {

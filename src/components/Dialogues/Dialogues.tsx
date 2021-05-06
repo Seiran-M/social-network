@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import styles from './Dialogues.module.scss'
 import {DialogueItem} from './DialoguesItem/DialoguesItem'
 import {Message} from './Messages/Message'
@@ -6,7 +6,7 @@ import {TProps} from './DialoguesContainer'
 import {AddMessageFormRedux} from './AddMessageForm/AddMessageForm'
 
 
-export const Dialogues: React.FC<TProps> = (props) => {
+export const Dialogues: FC<TProps> = React.memo((props) => {
    const {dialoguesPage, sendMessage} = props
    const state = dialoguesPage
 
@@ -28,5 +28,5 @@ export const Dialogues: React.FC<TProps> = (props) => {
          </div>
       </div>
    )
-}
+})
 

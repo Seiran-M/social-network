@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {FC} from 'react'
 
-export const News: React.FC = () => {
+export const News: FC = React.memo(() => {
    return (
       <>
          News
       </>
    )
-}
+})

@@ -6,6 +6,7 @@ import {addPost} from '../../../redux/profile-reducer'
 
 
 const mapStateToProps = (state: AppStateType) => {
+
    return (
       {
          newPostText: state.profilePage.newPostText,

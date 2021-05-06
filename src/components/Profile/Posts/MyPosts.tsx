@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 
 import styles from './MyPosts.module.scss'
@@ -7,34 +7,29 @@ import {maxLengthCreator, required} from '../../../utils/validator'
 import {Textarea} from '../../../common/FormsContfolls/FormsControlls'
 
 
-export const MyPosts = React.memo((props: PropsType) => {
+export const MyPosts: FC<PropsType> = React.memo((props) => {
    const postsElement = props.posts.map(posts =>
       <Post key={posts.id} message={posts.message} likesCount={posts.likesCount} id={posts.id}/>)
    const onAddPost = (values: AddNewPostFormDataType) => {
       props.addPost(values.newPostText)
    }
-
    const maxLength10 = maxLengthCreator(10)
 
-   const AddNewPostForm: React.FC<InjectedFormProps<AddNewPostFormDataType>> = (props) => {
+
+   const AddNewPostForm: React.FC<InjectedFormProps<AddNewPostFormDataType>> = React.memo((props) => {
       return (
          <form onSubmit={props.handleSubmit}>
             <div>
-               <Field
-                  name="newPostText"
-                  component={Textarea}
-                  placeholder="Enter your text"
-                  validate={[required, maxLength10]}
-               />
+               <Field name="newPostText" component={Textarea} placeholder="Enter your text" validate={[required, maxLength10]}/>
             </div>
             <div>
                <button className={styles.btn}>Add post</button>
             </div>
          </form>
       )
-   }
-   const AddNewPostReduxForm = reduxForm<AddNewPostFormDataType>({form: 'ProfileAddNewPostForm'})(AddNewPostForm)
+   })
 
+   const AddNewPostReduxForm = reduxForm<AddNewPostFormDataType>({form: 'ProfileAddNewPostForm'})(AddNewPostForm)
    return (
       <div className={styles.postsBlock}>
          <h3>My posts</h3>
@@ -45,6 +40,7 @@ export const MyPosts = React.memo((props: PropsType) => {
       </div>
    )
 })
+
 
 // types
 type PropsType = {
