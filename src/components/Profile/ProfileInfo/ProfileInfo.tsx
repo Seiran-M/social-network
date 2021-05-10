@@ -1,21 +1,30 @@
-import React, {FC} from 'react'
+import React, {ChangeEvent, FC} from 'react'
 
-import style from './ProfileInfo.module.css'
+import styles from './ProfileInfo.module.css'
 import {Preloader} from '../../../common/Preloader/Preloader'
 import {ProfileType} from '../../../redux/profile-reducer'
 import {ProfileStatusWithHooks} from './ProfileStatusWithHooks'
+import userPhoto from './../../../assets/images/user.png'
 
 export const ProfileInfo: FC<PropsType> = React.memo((props) => {
-   const {profile, status, updateUserStatus} = props
+   const {profile, status, updateUserStatus, isOwner, savePhoto} = props
 
    if (!profile) {
       return <Preloader/>
    }
+   const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+      if (e.currentTarget.files && e.currentTarget.files.length) {
+         savePhoto(e.currentTarget.files[0])
+      }
+   }
 
    return (
       <>
-         <div className={style.descriptionBlock}>
-            <img src={profile && profile.photos ? profile.photos.large : 'https://www.google.com.tr/url?sa=i&url=https%3A%2F%2Fok.ru%2Fprofile%2F573058647374&psig=AOvVaw3HfOwswUBXICJYAXeEbbAd&ust=1618426094275000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCvhKTx--8CFQAAAAAdAAAAABAD'} alt={'profile'}/>
+         <div className={styles.descriptionBlock}>
+            <img src={profile.photos.large || userPhoto} className={styles.userPhoto} alt={'profile'}/>
+            <div>
+               {isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
+            </div>
             <div>Name: {profile.fullName}</div>
             <div>About me: {profile.aboutMe}</div>
             <div>{profile.lookingForAJob}</div>
@@ -31,4 +40,6 @@ type PropsType = {
    profile: ProfileType
    status: string
    updateUserStatus: (status: string) => void
+   isOwner: boolean
+   savePhoto: (file: any) => void
 }

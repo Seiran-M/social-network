@@ -7,10 +7,12 @@ import style from './Profile.module.scss'
 import {Profile} from './Profile'
 import {AppStateType} from '../../redux/redux-store'
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'
-import {getUserProfile, getUserStatus, updateUserStatus} from '../../redux/profile-reducer'
+import {getUserProfile, getUserStatus, savePhoto, updateUserStatus} from '../../redux/profile-reducer'
 
 class ProfileContainer extends React.PureComponent<PropsType, AppStateType> {
-   componentDidMount() {
+
+
+   refreshProfile() {
       const {authorizedUserId, history, match, getUserProfile, getUserStatus} = this.props
       let userId = match.params.userId
       if (!userId) {
@@ -23,12 +25,27 @@ class ProfileContainer extends React.PureComponent<PropsType, AppStateType> {
       getUserStatus(userId)
    }
 
+   componentDidMount() {
+      this.refreshProfile()
+   }
+
+   componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<AppStateType>, snapshot?: any) {
+      if (this.props.match.params.userId !== prevProps.match.params.userId)
+         this.refreshProfile()
+   }
+
    render() {
       const {profile, status, updateUserStatus} = this.props
 
       return (
          <div className={style.content}>
-            <Profile {...this.props} profile={profile} status={status} updateUserStatus={updateUserStatus}/>
+            <Profile {...this.props}
+                     isOwner={!this.props.match.params.userId}
+                     profile={profile}
+                     status={status}
+                     updateUserStatus={updateUserStatus}
+                     savePhoto={this.props.savePhoto}
+            />
          </div>
       )
    }
@@ -41,9 +58,9 @@ export const mapStateToProps = (state: AppStateType) => ({
    isAuth: state.auth.isAuth
 })
 
-const connector = connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus})
+const connector = connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus, savePhoto})
 export default compose<React.ComponentType>(
-   connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}),
+   connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus, savePhoto}),
    withRouter,
    withAuthRedirect,
    connector
