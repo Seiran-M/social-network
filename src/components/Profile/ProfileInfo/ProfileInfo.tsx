@@ -8,41 +8,41 @@ import userPhoto from './../../../assets/images/user.png'
 import ProfileDataForm from './ProfileDataForm'
 
 export const ProfileInfo: FC<ProfileInfoPropsType> = (props) => {
-      const {profile, status, updateUserStatus, isOwner, savePhoto, saveProfile} = props
+   const {profile, status, updateUserStatus, isOwner, savePhoto, saveProfile} = props
 
-      const [editMode, setEditMode] = useState(false)
-      const onEditMode = () => {
-         setEditMode(true)
-      }
+   const [editMode, setEditMode] = useState(false)
+   const onEditMode = () => {
+      setEditMode(true)
+   }
 
-      if (!profile) {
-         return <Preloader/>
+   if (!profile) {
+      return <Preloader/>
+   }
+   const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+      if (e.currentTarget.files && e.currentTarget.files.length) {
+         savePhoto(e.currentTarget.files[0])
       }
-      const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
-         if (e.currentTarget.files && e.currentTarget.files.length) {
-            savePhoto(e.currentTarget.files[0])
-         }
-      }
-      const onSubmit = (formData: ProfileType) => {
-         saveProfile(formData)
-         setEditMode(false)
-      }
+   }
+   const onSubmit = (formData: ProfileType) => {
+      saveProfile(formData)
+      setEditMode(false)
+   }
 
    return (
-            <div className={styles.descriptionBlock}>
-               <ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus}/>
+      <div className={styles.descriptionBlock}>
+         <ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus}/>
 
-               <img src={profile.photos.large || userPhoto} className={styles.userPhoto} alt={'profile'}/>
-               <div>{isOwner && <input type="file" onChange={onMainPhotoSelected}/>}</div>
+         <img src={profile.photos.large || userPhoto} className={styles.userPhoto} alt={'profile'}/>
+         <div>{isOwner && <input type="file" onChange={onMainPhotoSelected}/>}</div>
 
-               {editMode
-                  ? <ProfileDataForm onSubmit={onSubmit} initialValues={profile} profile={profile}/>
-                  : <ProfileData profile={profile} isOwner={isOwner} onEditMode={onEditMode}/>
-               }
+         {editMode
+            ? <ProfileDataForm onSubmit={onSubmit} initialValues={profile} profile={profile}/>
+            : <ProfileData profile={profile} isOwner={isOwner} onEditMode={onEditMode}/>
+         }
 
-            </div>
-      )
-   }
+      </div>
+   )
+}
 
 // types
 type ProfileInfoPropsType = {
@@ -60,7 +60,9 @@ const ProfileData: FC<ProfileDataPropsType> = (props) => {
 
    return (
       <>
-         {isOwner && <div><button onClick={onEditMode}>Редактировать</button></div>}
+         {isOwner && <div>
+             <button onClick={onEditMode}>Редактировать</button>
+         </div>}
 
          <div><b>Name:</b><span className={styles.name}> {profile.fullName}</span></div>
          <div><b>About me:</b><span>{profile.aboutMe}</span></div>
