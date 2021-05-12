@@ -6,11 +6,12 @@ import {MyPostsContainer} from './Posts/MyPostsContainer'
 import {ProfileType} from '../../redux/profile-reducer'
 
 export const Profile: FC<PropsType> = React.memo((props) => {
-   const {profile, status, updateUserStatus, isOwner, savePhoto} = props
+   const {profile, status, updateUserStatus, isOwner, savePhoto, saveProfile} = props
 
    return (
       <div className={styles.content}>
-         <ProfileInfo savePhoto={savePhoto} isOwner={isOwner} profile={profile} status={status} updateUserStatus={updateUserStatus}/>
+         <ProfileInfo savePhoto={savePhoto} isOwner={isOwner} profile={profile}
+                      status={status} updateUserStatus={updateUserStatus} saveProfile={saveProfile}/>
          <MyPostsContainer/>
       </div>
    )
@@ -23,4 +24,5 @@ type PropsType = {
    updateUserStatus: (status: string) => void
    isOwner:boolean
    savePhoto:(file:any)=>void
+   saveProfile:(profile:ProfileType)=>void
 }
